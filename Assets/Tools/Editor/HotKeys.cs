@@ -32,11 +32,6 @@ public class HotKeys
         var setGizmoEnable = annotation_util.GetMethod("SetGizmoEnabled", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
         var setIconEnabled = annotation_util.GetMethod("SetIconEnabled", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
 
-        var iconSize = annotation_util.GetProperty("iconSize", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        var showGrid = annotation_util.GetProperty("showGrid", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        var showSelectionOutline = annotation_util.GetProperty("showSelectionOutline", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        var showSelectionWire = annotation_util.GetProperty("showSelectionWire", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-
         var annotations = getAnnotations.Invoke(null, null) as System.Array;
         foreach(var a in annotations)
         {
@@ -44,28 +39,6 @@ public class HotKeys
             string cls = (string)scriptClass.GetValue(a);
             setGizmoEnable.Invoke(null, new object[] { cid, cls, s_GizmoEnabled ? 1 : 0 });
             setIconEnabled.Invoke(null, new object[] { cid, cls, s_GizmoEnabled ? 1 : 0 });
-        }
-        s_GizmoEnabled = !s_GizmoEnabled;
-        return;
-
-        if (s_GizmoEnabled)
-        {
-            s_PreviewIconSize = (float)iconSize.GetValue(null, null);
-            s_PreviewShowGrid = (bool)showGrid.GetValue(null, null);
-            s_PreviewShowSelectionOutline = (bool)showSelectionOutline.GetValue(null, null);
-            s_PreviewShowSelectionWire = (bool)showSelectionWire.GetValue(null, null);
-
-            iconSize.SetValue(null, 0.0f, null);
-            showGrid.SetValue(null, false, null);
-            showSelectionOutline.SetValue(null, false, null);
-            showSelectionWire.SetValue(null, false, null);
-        }
-        else
-        {
-            iconSize.SetValue(null, s_PreviewIconSize, null);
-            showGrid.SetValue(null, s_PreviewShowGrid, null);
-            showSelectionOutline.SetValue(null, s_PreviewShowSelectionOutline, null);
-            showSelectionWire.SetValue(null, s_PreviewShowSelectionWire, null);
         }
         s_GizmoEnabled = !s_GizmoEnabled;
     }

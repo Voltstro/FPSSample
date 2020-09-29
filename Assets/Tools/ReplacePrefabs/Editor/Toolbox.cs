@@ -153,7 +153,7 @@ public class ReplaceToolWindow : EditorWindow
             if (AssetDatabase.Contains(go))
             {
                 ProjectSelectedCount += 1;
-                if (PrefabUtility.FindPrefabRoot(go) != go)
+                if (PrefabUtility.GetOutermostPrefabInstanceRoot(go) != go)
                     return false;
             }
             else
@@ -192,10 +192,10 @@ public class ReplaceToolWindow : EditorWindow
         List<GameObject> NewGO = new List<GameObject>();
         foreach (var go in Selection.gameObjects)
         {
-            if (go != null && !AssetDatabase.Contains(go) && (PrefabUtility.FindPrefabRoot(go) == go || (PrefabUtility.FindPrefabRoot(go) != go && EditorUtility.DisplayDialog("Prefab child selected",
+            if (go != null && !AssetDatabase.Contains(go) && (PrefabUtility.GetOutermostPrefabInstanceRoot(go) == go || (PrefabUtility.GetOutermostPrefabInstanceRoot(go) != go && EditorUtility.DisplayDialog("Prefab child selected",
                 "The selected gameobject [" + go.name + "] is not the prefab root", "Replace the prefab root", "Skip this object"))))
             {
-                var goRoot = PrefabUtility.FindPrefabRoot(go);
+                var goRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(go);
                 Debug.Log("Replacing: [" + goRoot.name + "] by: [" + ReplaceSource.name + "]");
                 NewGO.Add(Replace(ref goRoot, ref ReplaceSource));
             }
@@ -238,7 +238,7 @@ public class ReplaceToolWindow : EditorWindow
         {
             foreach (Transform child in children)
             {
-                if (child.parent == ReplaceDest.transform && PrefabUtility.FindPrefabRoot(child.gameObject) != ReplaceDest)
+                if (child.parent == ReplaceDest.transform && PrefabUtility.GetOutermostPrefabInstanceRoot(child.gameObject) != ReplaceDest)
                 {
                     Vector3 storedPosition = child.localPosition;
                     Vector3 storedRotation = child.localEulerAngles;
@@ -298,8 +298,8 @@ static class ToolBox
         foreach (Transform child in CurrentGO.transform)
         {
             var isPrefab = (PrefabUtility.GetCorrespondingObjectFromSource(child.gameObject) != null);
-            var isBroken = (PrefabUtility.GetPrefabObject(child.gameObject) == null);
-            var isPrefabRoot = (child.gameObject == PrefabUtility.FindRootGameObjectWithSameParentPrefab(child.gameObject));
+            var isBroken = (PrefabUtility.GetPrefabInstanceHandle(child.gameObject) == null);
+            var isPrefabRoot = (child.gameObject == PrefabUtility.GetOutermostPrefabInstanceRoot(child.gameObject));
             var isDisabled = (!child.gameObject.activeSelf);
             List<GameObject> ResultListChild = new List<GameObject>();
 

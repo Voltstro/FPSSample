@@ -49,8 +49,8 @@ public struct SpectatorCamSpawnRequest : IComponentData
             position = position,
             rotation = rotation,
         };
-        commandBuffer.CreateEntity();
-        commandBuffer.AddComponent(data);
+        
+        commandBuffer.AddComponent(commandBuffer.CreateEntity(), data);
     }
 }
 

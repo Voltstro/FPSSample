@@ -26,7 +26,29 @@ using UnityEditor;
 [System.Serializable]
 public struct WeakAssetReference
 {
-    public int val0;
+	public bool Equals(WeakAssetReference other)
+	{
+		return val0 == other.val0 && val1 == other.val1 && val2 == other.val2 && val3 == other.val3;
+	}
+
+	public override bool Equals(object obj)
+	{
+		return obj is WeakAssetReference other && Equals(other);
+	}
+
+	public override int GetHashCode()
+	{
+		unchecked
+		{
+			int hashCode = val0;
+			hashCode = (hashCode * 397) ^ val1;
+			hashCode = (hashCode * 397) ^ val2;
+			hashCode = (hashCode * 397) ^ val3;
+			return hashCode;
+		}
+	}
+
+	public int val0;
     public int val1;
     public int val2;
     public int val3;

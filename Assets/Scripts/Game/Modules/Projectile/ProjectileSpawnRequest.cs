@@ -17,8 +17,7 @@ public struct ProjectileRequest : IComponentData
             teamId = teamId,
         };
 
-        commandBuffer.CreateEntity();
-        commandBuffer.AddComponent(request);
+        commandBuffer.AddComponent(commandBuffer.CreateEntity(), request);
     }
     
     public WeakAssetReference projectileAssetGuid;

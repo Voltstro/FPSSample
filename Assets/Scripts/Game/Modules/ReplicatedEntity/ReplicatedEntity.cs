@@ -74,8 +74,9 @@ public class ReplicatedEntity : ComponentDataProxy<ReplicatedEntityData>
         if (EditorApplication.isPlaying)
             return;
 
-        PrefabType prefabType = PrefabUtility.GetPrefabType(this);
-        if (prefabType == PrefabType.Prefab || prefabType == PrefabType.ModelPrefab)
+        PrefabAssetType prefabType = PrefabUtility.GetPrefabAssetType(this);
+
+        if (prefabType == PrefabAssetType.Regular || prefabType == PrefabAssetType.Model)
         {
             netID = null;
         }

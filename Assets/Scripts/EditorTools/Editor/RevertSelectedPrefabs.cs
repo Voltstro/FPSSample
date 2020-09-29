@@ -6,6 +6,6 @@ public class RevertSelectedPrefabs
     static void Execute()
     {
         foreach(var gameObject in Selection.gameObjects)
-            PrefabUtility.RevertPrefabInstance(gameObject);
+            PrefabUtility.RevertPrefabInstance(gameObject, InteractionMode.UserAction);
     }
 }

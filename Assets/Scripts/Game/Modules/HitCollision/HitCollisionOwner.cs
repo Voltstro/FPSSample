@@ -24,7 +24,7 @@ public struct HitCollisionOwnerData : IComponentData
 [DisallowMultipleComponent]
 public class HitCollisionOwner : ComponentDataProxy<HitCollisionOwnerData>
 {
-    private void OnEnable()
+	protected override void OnEnable()
     {
         // Make sure damage event buffer is created
         // TODO (mogensh) create DamageEvent buffer using monobehavior wrapper (when it is available) 

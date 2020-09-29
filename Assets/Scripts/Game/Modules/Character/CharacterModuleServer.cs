@@ -21,8 +21,7 @@ public struct CharacterSpawnRequest : IComponentData
     public static void Create(EntityCommandBuffer commandBuffer, int characterType, Vector3 position, Quaternion rotation, Entity playerEntity)
     {
         var data = new CharacterSpawnRequest(characterType, position, rotation, playerEntity);
-        commandBuffer.CreateEntity();
-        commandBuffer.AddComponent(data);
+        commandBuffer.AddComponent(commandBuffer.CreateEntity(), data);
     }
 }
 
@@ -46,8 +45,7 @@ public struct CharacterDespawnRequest : IComponentData
         {
             characterEntity = characterEntity,
         };
-        commandBuffer.CreateEntity();
-        commandBuffer.AddComponent(data);
+        commandBuffer.AddComponent(commandBuffer.CreateEntity(), data);
     }
 }
 

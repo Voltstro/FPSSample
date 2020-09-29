@@ -21,8 +21,7 @@ public struct GrenadeSpawnRequest : IComponentData
         data.owner = owner;
         data.teamId = teamId;
             
-        commandBuffer.CreateEntity();
-        commandBuffer.AddComponent(data);
+        commandBuffer.AddComponent(commandBuffer.CreateEntity(), data);
     }
 }
 

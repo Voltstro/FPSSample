@@ -83,7 +83,7 @@ public class PresentationRegistry : RegistryBase
         }
     }
     
-    public virtual bool Verify()
+    public override bool Verify()
     {
         return true;
     }

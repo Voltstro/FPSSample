@@ -38,8 +38,8 @@ public struct SplashDamageRequest: IComponentData
 			collisionMask = collisionMask,
 			settings = settings
 		};
-		commandBuffer.CreateEntity();
-		commandBuffer.AddComponent(request);
+		
+		commandBuffer.AddComponent(commandBuffer.CreateEntity(), request);
 	}
 }
 

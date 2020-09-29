@@ -169,8 +169,7 @@ public class VFXSystem : ComponentSystem
     EffectTypeData RegisterImpactType(VisualEffectAsset template)
     {
         GameDebug.Assert(!m_EffectTypeData.ContainsKey(template));
-        GameDebug.Assert(!template != null);
-        
+
         GameObject go = new GameObject(template.name);
         go.transform.parent = m_rootGameObject.transform;
         go.transform.position = Vector3.zero;
