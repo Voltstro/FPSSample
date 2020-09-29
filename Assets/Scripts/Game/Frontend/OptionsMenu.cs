@@ -168,7 +168,7 @@ public class OptionsMenu : MonoBehaviour
     public void OnGDRP()
     {
 #if ENABLE_CLOUD_SERVICES_ANALYTICS
-        UnityEngine.Analytics.DataPrivacy.FetchPrivacyUrl(OnUrlReceived, OnFailure);
+        //UnityEngine.Analytics.DataPrivacy.FetchPrivacyUrl(OnUrlReceived, OnFailure);
 #endif
     }
 
